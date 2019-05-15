@@ -45,13 +45,18 @@ export default class IndexScreen extends React.Component {
     };
   };
 
+  state = {
+    stateItems: items
+  };
+
   render() {
+    const { stateItems } = this.state;
     const { navigation } = this.props;
 
     return (
       <View style={styles.container}>
         <Text>Index Screen</Text>
-        {items.map((item) => (
+        {stateItems.map((item) => (
           <Button
             key={`bla${item.itemId}`}
             title={`Got to Detail #${item.itemId}`}
@@ -61,6 +66,21 @@ export default class IndexScreen extends React.Component {
             color={colors.primary}
           />
         ))}
+        <Button
+          title="Add element"
+          onPress={() =>
+            this.setState({
+              stateItems: [
+                ...stateItems,
+                {
+                  itemId: 7,
+                  otherParam: '7thing you want here'
+                }
+              ]
+            })
+          }
+          color={colors.secondary}
+        />
       </View>
     );
   }
